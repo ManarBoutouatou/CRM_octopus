@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% block title %}
+<title>contact</title>
+{% endblock %}
+
+<div class="content-wrapper">
+  <div class="page-header">
+      <h3 class="page-title">
+        contact
+      </h3>
+  </div> 
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="border-bottom text-center pb-4">
+                {% if company.logo %} 
+                  <td ><img src="{{company.logo.url}}" alt="profile" class="img-lg rounded-circle mb-3"> </td>
+                                                
+                {% else %} 
+                  <td ><img  src="{% static 'images/favicon.png' %}" alt="logo" class="img-lg rounded-circle mb-3"/> </td>
+                {% endif %}
+                <h3> {{company.name}}</h3>
+              </div>                     
+              <div class="border-bottom  py-4">
+                <div class="py-4">
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> industry</span> <span class="float-right text-muted"> {{company.industry}} </span>  </p>
+                  <p cla&tss="clearfix"> <span class="float-left" > </span> <span class="float-right text-muted">  </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> email</span> <span class="float-right text-muted"> {{company.email}}</span></p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> mobile</span><span class="float-right text-muted">  {{company.mobile}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> website</span><span class="float-right text-muted">  {{company.website}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> adress</span><span class="float-right text-muted">  {{company.adress}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> rc_code</span><span class="float-right text-muted">  {{company.rc_code}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> art_code</span><span class="float-right text-muted">  {{company.art_code}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> nif_code</span><span class="float-right text-muted">  {{company.nif_code}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> nif_code</span><span class="float-right text-muted">  {{company.nif_code}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> responsible_person</span><span class="float-right text-success">  {{company.responsible_person}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> cost </span><span class="float-right badge badge-pill badge-info">  {{company.annual_revenue}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> type</span><span class="float-right text-muted"> {{company.get_project_type_display}} </span> </p>
+                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> Start date </span><span class="float-right text-info">{{company.collab_start}}</span> </p>
+                </div>                                                       
+              </div>
+            </div>
+            <div class="col-lg-8 pl-lg-5">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h5>Overview</h5>
+                  <div class="d-flex align-items-center">
+                    <h5 class="mb-0 mr-2 text-muted"></h5>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-4 py-2 border-top ">
+                <ul class="nav profile-navbar">
+                </ul>
+              </div>
+              <div class="profile-feed">
+                <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title"> Employees</h4>
+                      <p class="card-description">
+                       
+                      </p>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead style="background-color: #2b2155; color:#fff;">
+                            <tr>
+                              <th> Name</th>
+                              <th> Decision case</th>
+                              <th>Phone number</th>
+                              <th>Email</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for employee in company_employees %}
+                           <tr>
+                               <td> <a href="{% url 'contact:clientdetail' employee.pk %}" style=" text-decoration:none; color:black;">{{employee.name}} </a></td>
+                               <td><span class="fe text-warning"> {{employee.get_decision_display}} </span></td>
+                               <td>{{employee.mobile}}</td>
+                              <td> {{employee.email}} </td>
+                           </tr>
+                            {% endfor %} 
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title"> Projects</h4>
+                      <p class="card-description">
+                       
+                      </p>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead style="background-color: #2b2155; color:#fff;">
+                            <tr>
+                              <th>Project</th>
+                              <th>Start date</th>
+                              <th>Status</th>
+                              <th>Cost</th>
+                              <th>Subscription type</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for project in company_projects %}
+                            <tr role="row" class="odd">
+                                    <td > <span class="badge badge-pill badge-light"><a href="{% url 'project:projectdetail' project.pk %}" style=" text-decoration:none; color:black;"> {{project.name}} </a></span></td>
+                                    <td> <span  class="d-block text-info">{{project.started_date}}</span></td>
+                                    <td>
+                                      {% if project.get_status_display == 'confirm' %}
+                                          <span class="badge badge-pill badge-success"> {{project.get_status_display}}</span>
+                                      {% elif project.get_status_display == 'completed' %}
+                                          <span class="badge badge-pill badge-info">{{project.get_status_display}}</span>
+                                      {% else  %}
+                                           <span class="badge badge-pill badge-warning">{{project.get_status_display}}</span>
+                                      {% endif %}</td>
+                                    <td><span class=" badge badge-pill badge-info">{{project.cost}} DZD </span></td>
+                                    <td><span  class="badge badge-pill badge-dark"> {{project.get_contract_display}} </span></td>
+                                    
+                                    
+                                </tr>    
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+               
+              </div>
+            </div>
+          </div> 
+        
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- main-panel ends -->         
+{% endblock content %}

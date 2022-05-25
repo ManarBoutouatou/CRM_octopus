@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% block title %}
+<title>Calendar</title>
+{% endblock %}
+      <div class="content-wrapper">
+          <div class="page-header">
+              <h3 class="page-title">
+                Calendar
+              </h3>
+          </div>
+          <div class="col-12 grid-margin">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Event Report</h4>
+                
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                {{ field.label }} <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ field.label }} <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post"  action="{% url 'meetings:edit_event' event.pk %}" class="form-sample">
+                    {% csrf_token %}
+                  <p class="card-description">
+                  </p>
+                  <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="col-sm-3 col-form-label" for="id_title">Title :</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="title"  id="id_title" class="form-control " required="" value="{{event.title}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="col-sm-3 col-form-label" for="id_start_date">Event start time :</label>
+                                <div class="col-sm-6">
+                                    <input type="date" name="start_date"  id="id_start_date" class="form-control " selected required="" value="{{event.start_date|date:'Y-m-d'}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="id_manager">Manager :</label>
+                                <select name="manager" id="id_manager" class="form-control select" >
+                                    <option value="{{event.manager}}"selected="">{{event.manager}}</option>
+                                    {% for employee in employees %} 
+                                    <option value="{{employee.id}}">{{employee.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="id_company">Company :</label>
+                                <select name="manager" id="id_company" class="form-control select bg-white">
+                                    <option value="{{event.manager}}"selected="">{{event.company}}</option>
+                                    {% for company in companies %}
+                                    <option value="" selected=""></option>
+                                    <option value="{{company.id}}">{{company.name}}</option>
+                                    {% endfor %}			
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <label class="col-sm-3 col-form-label" for="id_description">Description :</label>
+                                <div class="col-sm-6">
+                                    <textarea cols="40" rows="10" name="description"  id="id_description" class="form-control " value="{{event.description}}"> {{event.description}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        
+                    </div>
+                </form>
+              </div>
+            </div>
+          
+          </div> 
+
+          <div>
+            
+        </div>
+    <!-- main-panel ends -->
+  </div>
+ 
+  {% endblock content %}

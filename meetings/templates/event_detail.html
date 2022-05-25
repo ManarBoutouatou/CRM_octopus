@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% block title %}
+<title>Calendar</title>
+{% endblock %}
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+          Calendar 
+        </h3>
+    </div> 
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card px-2">
+                <div class="card-body">
+                    <div class="container-fluid">
+                      <img src="{% static 'images/logo.png' %}" style="width:200px; height:80px; float:left;" alt="logo"/>
+                      {% comment %} <h4 class="text-right my-5">{{event.title}}&nbsp;&nbsp;</h4>  {% endcomment %}
+                      <p class="text-right my-5">Date : {{event.start_date}}</p>
+                      <hr>
+                    </div>
+                    <div class="container-fluid d-flex justify-content-between">
+                      <div class="col-lg-3 pl-0">
+                        <p class="mt-5 mb-2"><b>{{event.title}}</b></p>
+                        <p> <span style="font-weight: bold;">Meeting with :</span> {{event.company}}<br> <span style="font-weight: bold;">Manager :</span> {{event.manager}}<br></p>
+                      </div>
+                      <div class="col-lg-3 pr-0">
+                        <p class="mt-5 mb-2 text-right"><b></b></p>
+                        <p class="text-right"><br> <br><br><br><br></p>
+                      </div>
+                    </div>
+                    {% comment %} <div class="container-fluid d-flex justify-content-between">
+                      <div class="col-lg-3 pl-0">
+                        <p class="mb-0 mt-5">Invoice Date : 23rd Jan 2016</p>
+                        <p>Due Date : 25th Jan 2017</p>
+                      </div>
+                    </div> {% endcomment %}
+                    <div class="container-fluid mt-5 d-flex justify-content-center w-100">
+                      <div class="table-responsive w-100">
+                        <h5>Notes :</h5>
+                          <table class="table">
+                            <thead>
+                              <tr class="bg-dark text-white">
+                                  <th></th>
+                                  <th></th>
+                                  <th class="text-right"></th>
+                                  <th class="text-right"> </th>
+                                  <th class="text-right"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                              <tr class="text-right">
+                                <td class="text-left"> {{event.description|safe}}</td>
+                             
+                              </tr>
+                          
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+                   
+                    <div class="container-fluid w-100">
+                      <a href="{% url 'meetings:edit_event' event.pk %}" class="btn btn-primary float-right mt-4 ml-2">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- main-panel ends -->
+</div>
+
+{% endblock content %}

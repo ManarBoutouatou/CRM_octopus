@@ -1,0 +1,138 @@
+{% load static %}
+
+
+
+    <div class="container-fluid page-body-wrapper">
+
+          <!-- partial:../../partials/_settings-panel.html -->
+          <div class="theme-setting-wrapper">
+            <div id="settings-trigger"><i class="fas fa-fill-drip"></i></div>
+            <div id="theme-settings" class="settings-panel">
+              <i class="settings-close fa fa-times"></i>
+              <p class="settings-heading">SIDEBAR SKINS</p>
+              <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+              <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+              <p class="settings-heading mt-2">HEADER SKINS</p>
+              <div class="color-tiles mx-0 px-4">
+                <div class="tiles primary"></div>
+                <div class="tiles success"></div>
+                <div class="tiles warning"></div>
+                <div class="tiles danger"></div>
+                <div class="tiles info"></div>
+                <div class="tiles dark"></div>
+                <div class="tiles default"></div>
+              </div>
+            </div>
+          </div>
+
+     <!-- partial:../../partials/_sidebar.html -->
+     <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item nav-profile">
+            <div class="nav-link">
+              <div class="profile-image">
+                {% comment %} <img  src="{{user.display_picture}}" alt="image"/> {% endcomment %}
+
+              {% if user.picture %} 
+                  <img  src="{{user.picture.url}}" alt="image"/>
+              {% else %} 
+                  <img  src="{% static 'images/avatar.png' %}" alt="logo"/> 
+              {% endif %} 
+              </div>
+              <div class="profile-name">
+                <p class="name">
+                  <a href="{% url 'accounts:userdetail' %}" style="text-decoration:none; color:black;">{{ user.get_username }} </a>
+                </p>
+                <p class="designation">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/" >
+              <i class="fa fa-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
+              <i class="fas fa-solid fa-calendar menu-icon"></i> 
+              <span class="menu-title" >Calendar</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="editors">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="{% url 'meetings:calendar' %}" style="text-decoration : none;"> Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'meetings:event_list' %}"   style="text-decoration : none;"> Reports </a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="fas fa-solid fa-address-book menu-icon"></i> 
+              <span class="menu-title">Contact</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{% url 'contact:companylist' %}"  style="text-decoration:none;">Company list</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'contact:clientlist' %}" style="text-decoration:none;">Client list</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'contact:leadlist' %}" style="text-decoration:none;">Leads</a></li>
+              </ul>
+              </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'project:projectlist' %}"  >
+              <i class="fa fa fa-tasks menu-icon"></i> 
+              <span class="menu-title">Project</span>
+            </a>
+          </li>
+       
+          <li class="nav-item"> 
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="fas fa-solid fa-money-bill menu-icon"></i> 
+              <span class="menu-title">Cashflow</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{% url 'cashflow:accountlist' %}" style="text-decoration:none;">Accounts</a></li>
+                <li class="nav-item"> <a class="nav-link" href="" style="text-decoration:none;">Transaction</a></li> 
+              </ul>
+            </div>
+          </li> 
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="fas fa-solid fa-receipt menu-icon"></i> 
+              <span class="menu-title" >Invoice</span> 
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu"> 
+                <li class="nav-item"> <a class="nav-link" href="" style="text-decoration:none;">Invoice list</a></li>
+              </ul>
+            </div>
+          </li> {% endcomment %}
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
+              <i class="fas fa-solid fa-headset menu-icon"></i>
+              <span class="menu-title">Client service</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-advanced">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="" style="text-decoration:none;">ticketing</a></li>
+              </ul>
+            </div>
+          </li> {% endcomment %}
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" href="#"  >
+              <i class="fas fa-solid fa-moon menu-icon"></i> 
+              <span class="menu-title">Dark mode</span> 
+            </a>
+          </li> {% endcomment %}
+          
+        </ul>
+      </nav>
+      <!-- partial -->

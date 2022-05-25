@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% block title %}
+<title>Calendar</title>
+{% endblock %}
+<style>
+
+    .calendar {
+        width:98%;
+        margin: auto;
+        font-size: 13px;
+        
+      }
+      
+      .calendar tr, .calendar td {
+       
+      }
+      
+      .calendar th {
+        background-color:#392C70;
+        font-size: 16px;
+        text-align: center; 
+        border: 1px solid #ccc;
+        color: #fff;
+
+      }
+      
+      .calendar td  {
+       
+        color: #fff;
+        
+      
+      }
+      .case {
+        text-align: initial;
+        font-size: 18px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        
+      }
+      
+      .calendar li {
+        background-color:#CCC;
+        text-align: center;
+        font-size: 14px;
+        border: 1px solid #ccc; 
+        color: #fff;
+      }
+      .calendar ul {
+        width:130px;
+        height: 110px;
+        text-align: center;
+        color: #fff;
+
+        
+      }
+      
+      .month {
+        font-size: 25px;
+      }
+      
+      .date { 
+        background-color:#392C70;
+        text-align: center;
+        font-size: 18px;
+        border-right: 1px solid #ccc;
+      }
+      
+      
+      
+      .left {
+        float: left;
+      }
+      
+      .right {
+        float: right;
+      }
+      .a {
+          text-decoration: none;
+      }
+      .btn {
+        outline: none;
+        color: #ccc;
+        background-color: transparent;
+        border: 1px solid #392C70;
+      } 
+      .btn:hover {
+      
+        color: #ccc;
+       
+      } 
+      
+      .clearfix {
+        margin: 15px;
+      }
+      
+      .meet{
+        
+        background-color: transparent;
+        border: 1px solid #CCC;
+      }  
+      .hello {
+        position:relative; 
+        top:980px;
+        background-color: rgb(104, 104, 34);
+        border: 1px solid #CCC; 
+      }      
+</style>
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+    <div class="content container-fluid">
+    
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Calendar</h3>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row ">
+            <!-- Calendar -->
+        
+            <div class="col-sm-12">
+                <div class="clearfix">
+                    <a class="btn  left" href="{% url 'meetings:calendar' %}?{{ prev_month }}" style="color : black;"> Previous Month </a>
+                    <a class="btn  right" href="{% url 'meetings:calendar' %}?{{ next_month }}" style="color : black;"> Next Month </a>
+                    <a class="btn  right" href="{% url 'meetings:event_new' %}" style="color : black;"> New Event </a>
+                </div>
+            </div>
+            <div class="col-sm-12 ">
+      
+                       {{ calendar }}
+           
+            </div>
+        </div>                    
+        </div>
+    </div>			
+</div>
+<!-- /Page Wrapper -->
+
+</div>
+<!-- /Main Wrapper -->
+<!-- <div class="hello">  
+    <p> hello </p>
+</div> -->
+{% endblock content %}

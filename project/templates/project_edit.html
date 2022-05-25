@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% block title %}
+<title>Project</title>
+{% endblock %}
+ 
+      <div class="content-wrapper">
+          <div class="page-header">
+              <h3 class="page-title">
+                Project
+              </h3>
+          </div>
+          <div class="col-12 grid-margin">
+            <div class="card">
+              <div class="card-body">
+       
+                  <h4 class="card-title">Edit Project</h4>
+                <form action="{% url 'project:editproject' project.pk %}" method="post"  class="form-sample">
+                    {% csrf_token %}
+                    <p class="card-description">
+                    
+                    </p>
+                                  {% comment %} row {% endcomment %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="id_name">Project title</label>
+                                            <div class="col-sm-9">
+                                              <input  type="text" name="name"  id="id_name"  required="" class="form-control"  value="{{project.name}}">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="id_started_date">Start date</label>
+                                            <div class="col-sm-9">
+                                              <input type="date" name="started_date"  id="id_started_date" required="" maxlength="200" class="form-control"  value="{{project.started_date|date:'Y-m-d'}}">
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                  {% comment %} end of row {% endcomment %}
+                                  {% comment %} row {% endcomment %}
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group row">
+                                          <label class="col-sm-3 col-form-label" for="id_deadline">Deadline</label>
+                                          <div class="col-sm-9">
+                                          <input type="date" name="deadline"   id="id_deadline" required=""  maxlength="200" class="form-control" value="{{project.deadline|date:'Y-m-d'}}">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    
+                                      <div class="col-md-6">
+                                          <div class="form-group row">
+                                            <label  class="col-sm-3 col-form-label" for="id_manager">Manager</label>              
+                                            <div class="col-sm-9">
+                                              <select name="manager" id="id_manager" class="form-control select bg-white">
+                                                <option value="{{project.company}}"selected="">{{project.company}}</option>
+                                                {% for employee in employees %} 
+                                                <option value="{{employee.id}}">{{employee.name}} | {{employee.company}} </option>
+                                                {% endfor %}
+                                              </select>
+                                            </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  {% comment %} end of row {% endcomment %}
+                                  {% comment %} row {% endcomment %}
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group row">				
+                                          <label class="col-sm-3 col-form-label"  for="id_company">Company </label>
+                                          <div class="col-sm-9">
+                                            <select class="form-control"  name="company" id="id_company"> 
+                                            <option value="{{project.manager}}"selected="">{{project.manager}}</option>
+                                              {% for company in companies %}
+                                              <option value="{{company.id}}">{{company.name}}</option>
+                                              {% endfor %}	
+                                            </select>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group row">
+                                          <label class="col-sm-3 col-form-label" for="id_cost">Cost</label>
+                                          <div class="col-sm-9">
+                                          <input type="number" name="cost"   id="id_cost" required=""  maxlength="200" class="form-control" value="{{project.cost}}">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  {% comment %} end of row {% endcomment %}
+                                  {% comment %} row {% endcomment %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="form-group row"> 
+                                            <label class="col-sm-3 col-form-label"  for="id_contract">contract </label>
+                                            <div class="col-sm-9">
+                                              <select class="form-control"  name="contract" id="id_contract"> 
+                                                <option value="{{project.contract}}"selected="">{{project.get_contract_display}}</option>
+                                                <option value="H">hosting</option>
+                                                <option value="A">annual</option>
+                                                <option value="S">semi-anuual</option>
+                                                <option value="Q">quarterly</option>
+                                                <option value="AD">adverisement</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group row"> 
+                                            <label class="col-sm-3 col-form-label"  for="id_project_type">Type </label>
+                                            <div class="col-sm-9">
+                                              <select class="form-control"  name="project_type" id="id_project_type"> 
+                                                <option value="{{project.project_type}}"selected="">{{project.get_project_type_display}}</option>
+                                                <option value="EC">e-commerce</option>
+                                                <option value="WS">web site</option>
+                                                <option value="WA">web app</option>	
+                                              </select>
+                                          </div>
+                                        </div>  
+                                    </div>
+                                  </div>
+                                  {% comment %} end of row {% endcomment %}
+                            {% comment %} row {% endcomment %}
+                              <div class="row">
+                                  <div class="col-md-6">
+                                    <div class="form-group row"> 
+                                      <label class="col-sm-3 col-form-label"  for="id_status"> status </label>
+                                      <div class="col-sm-9">
+                                        <select class="form-control"  name="status" id="id_status" > 
+                                          <option value="{{project.status}}"selected="">{{project.get_status_display}}</option>
+                                          <option value="CO">confirm</option>
+                                          <option value="CP">completed</option>
+                                          <option value="PE">pending </option>	
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>   
+                                  <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">description </label>
+                                        <div class="col-sm-9">
+                                          <input type="date" name="contract_expiration"  id="id_contract_expiration" value="{{project.contract_expiration|date:'Y-m-d'}}" required maxlength="200" class="form-control">
+
+                                        </div>
+                                    </div>
+                                  </div>                         
+                              </div>
+                            {% comment %} end of row {% endcomment %}
+                                  {% comment %} row {% endcomment %}
+                              <div class="row">  
+                                <div class="col-md-6">
+                                  <div class="form-group row">
+                                      <label class="col-sm-3 col-form-label" for="id_description">description </label>
+                                      <div class="col-sm-9">
+                                        <textarea name="description" cols="40" rows="10" class="form-control bg-white" id="id_description"> {{project.description |safe}}</textarea>          
+                                      </div>
+                                  </div>
+                                </div>                         
+                            </div>
+                          {% comment %} end of row {% endcomment %}
+                                
+               
+                            <input type="submit" value="Submit" class="btn btn-primary mr-2" name="_save">
+
+                   
+                      </form>
+                      
+           
+              </div>
+            </div>
+          </div>
+
+
+      
+      
+      
+      
+      
+        </div>
+    <!-- main-panel ends -->
+  </div>
+
+  {% endblock content %}
