@@ -13,14 +13,12 @@ COMPANY_TYPE_CHOICES = (
     ('F', 'fournisseur'),
     ('P', 'partenaire'),
     ('CN', 'concurrent'),
-
 )
 PROJECT_TYPE_CHOICES = (
     ('EC', 'e-commerce'),
     ('WS', 'web site'),
     ('WA', 'web app'),
 )
-
 class Company(models.Model):
     name                = models.CharField(max_length=250)
     industry            = models.CharField(max_length=100, blank=True, null=True)

@@ -14,18 +14,18 @@ from django.views.generic import (
     FormView
 )
 from django.views.generic.edit import CreateView
-from pprint import pprint
-from contact.models import Company, Employee
-import project
-from project.models import Project
-from project.forms import Project, AddProjectForm
-from project.filters import ProjectFilter
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-import logging
 from django.contrib.messages.views import SuccessMessageMixin
+from contact.models import Company, Employee
+from .models import Transaction, Project
+from .forms import AddProjectForm, AddTransactionForm
+from .filters import ProjectFilter
+
+import logging
+from pprint import pprint
 
 # Create your views here.
 class RedirectPermissionRequiredMixin(PermissionRequiredMixin,):
@@ -33,7 +33,20 @@ class RedirectPermissionRequiredMixin(PermissionRequiredMixin,):
     def handle_no_permission(self):
         return redirect(self.get_login_url())
 
-
+class CashflowListView(ListView): 
+    template_name= "cashflow_list.html"
+    model = Transaction 
+    def get_context_data(self, **kwargs):
+        context = super(CashflowListView, self).get_context_data(**kwargs)
+        # context["transactions"] =Transaction.objects.all().order_by('date')
+        # filters=Transactionfilter(self.request.GET, queryset=Transaction.objects.all())
+        # context["transactions"] = filters.qs
+        context["total_payment"] =Transaction.payments.get_total_payment()
+        context["total_charges"] =Transaction.payments.get_total_charges()
+        context["total_creance"] =Transaction.payments.get_total_creance()
+        context["total_salaire"] =Transaction.payments.get_total_salaire()    
+        context["total_allouer"] =Transaction.payments.get_total_allouer()  
+        return context
 #project    
 class ProjectListView(RedirectPermissionRequiredMixin,ListView): 
     template_name= "project_list.html"
@@ -93,3 +106,17 @@ class ProjectDeleteView(RedirectPermissionRequiredMixin,SuccessMessageMixin, Del
     success_message = "Product deleted successfully."
     permission_required= 'project.delete_project'
     success_url = reverse_lazy('project:projectlist')
+
+
+class AddTransactionView(CreateView):
+    template_name= "add-transaction.html"
+    form_class= AddTransactionForm
+    model = Transaction
+    success_url = reverse_lazy('cashflow:cashflowlist')
+    def form_invalid(self, form):
+        pprint(form.errors)
+        return super().form_invalid(form)
+    def get_context_data(self, **kwargs):
+        context = super(AddAccountView, self).get_context_data(**kwargs)
+        context["companies"] = Company.objects.all()
+        return context
