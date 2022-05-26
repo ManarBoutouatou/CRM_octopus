@@ -18,8 +18,8 @@ from django.views.generic.edit import CreateView
 from pprint import pprint
 from contact.models import Company, Employee
 from cashflow.models import  Account
-from project.models import Project
-# from .filters import Accountfilter, Transactionfilter
+from project.models import Project, Transaction
+from .filters import Accountfilter, Transactionfilter
 from .forms import AddAccountForm
 # Create your views here.
 
@@ -32,29 +32,20 @@ class CashflowAccountListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(CashflowAccountListView, self).get_context_data(**kwargs)
         context["account_count"] =Account.objects.all().count()
-        # context["projects"] = Project.objects.filter(project_name__id=owner).distinct()
-        # context["projects"] = Project.objects.filter('project_name')
-        context["projects"] = Project.objects.all()
-        # filters=Accountfilter(self.request.GET, queryset=Account.objects.all())
-        # context["accounts"] = filters.qs
+        filters=Accountfilter(self.request.GET, queryset=Account.objects.all())
+        context["accounts"] = filters.qs
         return context
 
 class AccountDetailView(DetailView):
     model = Account
-    template_name= "cashflowaccount-detail.html"
+    template_name= "cashflow_account_detail.html"
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(AccountDetailView, self).get_context_data(**kwargs)
         account_id = self.get_object().id
-        context["accounts"] =Account.objects.all()
-        context["transactions"] =Transaction.objects.all()   
-        context["account_payment"] =Transaction.payments.get_account_payment(account_id)
-        context["account_charges"] =Transaction.payments.get_account_charges(account_id)
-        context["account_creance"] =Transaction.payments.get_account_creance(account_id)
-        context["account_salaire"] =Transaction.payments.get_account_salaire(account_id) 
-        context["account_allouer"] =Transaction.payments.get_account_allouer(account_id)        
-        context['payments'] = Transaction.objects.filter(account=account_id)     
-        return context
-        
+        context["account_transactions"] = Transaction.objects.filter(account=account_id)
+        context["transactions"] = Transaction.objects.all()
+        return context 
+
 class AddAccountView(CreateView):
     template_name= "add-accounts.html"
     form_class= AddAccountForm
@@ -68,3 +59,20 @@ class AddAccountView(CreateView):
         context["companies"] = Company.objects.all()
         return context
    
+##### 
+class CashflowListView(ListView): 
+    template_name= "cashflow_list.html"
+    model = Transaction 
+    def get_context_data(self, **kwargs):
+        context = super(CashflowListView, self).get_context_data(**kwargs)
+        # context["transactions"] =Transaction.objects.all().order_by('date')
+        filters=Transactionfilter(self.request.GET, queryset=Transaction.objects.all())
+        context["transactions"] = filters.qs
+        context["transactions_count"] =Transaction.objects.all().count()
+        context["total"] =Transaction.payments.get_total()
+        context["total_payment"] =Transaction.payments.get_total_payment()
+        context["total_charges"] =Transaction.payments.get_total_charges()
+        context["total_creance"] =Transaction.payments.get_total_creance()
+        context["total_salaire"] =Transaction.payments.get_total_salaire()    
+        context["total_allouer"] =Transaction.payments.get_total_allouer()  
+        return context

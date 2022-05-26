@@ -4,227 +4,206 @@
 {% block title %}
 <title>Cashflow</title>
 {% endblock %}
-<!-- Main Wrapper -->
-<div class="main-wrapper">
-<!-- Page Wrapper -->
-    <div class="page-wrapper">
-        <div class="content container-fluid">
-            <!-- Page Header -->
-            <div class="page-header">
-                
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h3 class="page-title bg-white">Cashflow</h3>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item active bg-white">Cashflow</li>
-                        </ul>
-                    </div>  
-                </div>
-                
-            </div> 
-            <div class="row">
-              <div class="col-sm-12">
-                  <div class="row">   
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card bg-white">
-                          <div class="card-body">
-                            <div class="dash-widget-header">
-                              <span class="dash-widget-icon text-danger border-danger">
-                                <i class="fa fa-money"></i>
-                              </span>
-                              <div class="dash-count">
-                                <h3>{{total_payment.amount__sum}} DZD</h3>
-                              </div>
-                            </div>
-                            <div class="dash-widget-info">
-                              <h6 class="text-muted">Payment</h6>
-                              <div class="progress progress-sm">
-                                <div class="progress-bar bg-danger w-50"></div>
-                              </div>
-                            </div>
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+            Cashflow
+        </h3>
+    </div> 
+    <div class="row">
+      <div class="col-md-2 grid-margin">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title mb-0">Total</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-inline-block pt-3">
+                          <div class="d-md-flex">
+                              <h4 class="mb-0"> {{transactions_count}} </h4>
+                              
                           </div>
-                        </div>
                       </div>
-                      <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card bg-white">
-                          <div class="card-body">
-                            <div class="dash-widget-header">
-                              <span class="dash-widget-icon text-warning  border-warning">
-                                <i class="fa fa-money"></i>
-                              </span>
-                              <div class="dash-count">
-                                <h3>{{total_creance.amount__sum}} DZD</h3>
-                              </div>
-                            </div>
-                            <div class="dash-widget-info">
-                              <h6 class="text-muted">Debt</h6>
-                              <div class="progress progress-sm">
-                                <div class="progress-bar bg-warning  w-50"></div>
-                              </div>
-                            </div>
+                  
+                  </div>
+              </div>
+          </div>
+      </div>
+       <div class="col-md-2 grid-margin">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title mb-0">paiement</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-inline-block pt-3">
+                          <div class="d-md-flex">
+                              <h4 class="mb-0">{{total_payment.amount__sum}} DZD</h4>
+                              
                           </div>
-                        </div>
                       </div>
-                      <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card bg-white">
-                          <div class="card-body">
-                            <div class="dash-widget-header">
-                              <span class="dash-widget-icon text-primary  border-primary">
-                                <i class="fa fa-money"></i>
-                              </span>
-                              <div class="dash-count">
-                                <h3>{{total_charges.amount__sum}} DZD</h3>
-                              </div>
-                            </div>
-                            <div class="dash-widget-info">
-                              <h6 class="text-muted">Cost</h6>
-                              <div class="progress progress-sm">
-                                <div class="progress-bar bg-primary  w-50"></div>
-                              </div>
-                            </div>
+                  
+                  </div>
+              </div>
+          </div>
+      </div>
+        <div class="col-md-2 grid-margin">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title mb-0">salaire</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-inline-block pt-3">
+                          <div class="d-md-flex">
+                              <h4 class="mb-0">{{total_salaire.amount__sum}} DZD </h4>
+                              
                           </div>
-                        </div>
                       </div>
-                      <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card bg-white">
-                          <div class="card-body">
-                            <div class="dash-widget-header">
-                              <span class="dash-widget-icon text-success  border-success">
-                                <i class="fa fa-money"></i>
-                              </span>
-                              <div class="dash-count">
-                                <h3>{{total_salaire.amount__sum}} DZD</h3>
-                              </div>
-                            </div>
-                            <div class="dash-widget-info">
-                              <h6 class="text-muted">paycheck</h6>
-                              <div class="progress progress-sm">
-                                <div class="progress-bar bg-success  w-50"></div>
-                              </div>
-                            </div>
+                  
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-2 grid-margin">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title mb-0">charges</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-inline-block pt-3">
+                          <div class="d-md-flex">
+                              <h4 class="mb-0">{{total_charges.amount__sum}} DZD </h4>
+                              
                           </div>
+                      </div>
+                  
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-2 grid-margin">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title mb-0">creance</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-inline-block pt-3">
+                          <div class="d-md-flex">
+                              <h4 class="mb-0">{{total_creance.amount__sum}} DZD </h4>
+                              
+                          </div>
+                      </div>
+                  
+                  </div>
+              </div>
+          </div>
+      </div>
+       <div class="col-md-2 grid-margin">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title mb-0">allouer</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-inline-block pt-3">
+                          <div class="d-md-flex">
+                              <h4 class="mb-0">{{total_allouer.amount__sum}} DZD </h4>
+                              
+                          </div>
+                      </div>
+                  
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="GET">
+                    <div class="d-md-flex justify-content-between align-items-center">
+                            <tr class="row">    
+                                <td><input type="search" class="form-control"   name="project" placeholder="project"> </td>  
+                                <td ><input type="date" class="form-control"  name="date"  placeholder="Date"></td> 
+                                <td >
+                                    <select class="form-control select bg-white" name="tr_type" >
+                                        <option value="">Select transaction type</option>
+                                        <option value="PA">paiement</option>
+                                        <option value="SA">salaire</option>
+                                        <option value="CR">creance</option>												
+                                        <option value="CR">charges</option>												
+                                        <option value="AL">allouer</option>												
+                                    </select>
+                                </td>       
+                                <td >  
+                                    <button type="submit" class="btn btn-primary mr-2"> <i class="fas fa-filter"></i></button>
+                                </td>
+                            </tr>
                         </div>
-                      </div>                    
-                        </div>
-                    </div>
-                    
-            </div>
-                
-            <!-- /Page Header -->
-            <div class="row bg-white">
-                    <div class="col-sm-12 bg-white"> 
-                        <div>
-                            <a href="">
-                            <button class="btnn"> New</button> </a>       
-                        </div>
-                     
-                        <br>
-                        </div>
-                        <div class="col-sm-12 bg-white"><div> 
-                            <div class="card bg-white">
-                                <div class="card-body bg-white">
-                                    <div class="table-responsive bg-white">
-                                        <table class="table  table-center mb-0 bg-white">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Search</th>
-                                                    <th>Type</th>
-                                                    <th>Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <form action="" method="GET">
-                                                   
-                                                   <tr>
-                                                        <td>
-                                                            <td>
-                                                                <input class="form-control mr-sm-2 bg-white" type="search" placeholder="Search" aria-label="Search" name="account">
-                                                            </td>
-                                                        </td>
-                                                        <td>
-                                                             <select class="form-control select bg-white" name="type" >
-                                                                    <option value=""></option>
-                                                                    <option value="PA">paiement</option>
-                                                                    <option value="SA">salaire</option>
-                                                                    <option value="CR">creance</option>
-                                                                    <option value="CH">charege</option>
-                                                                    <option value="AL">allouer</option>			  
-                                                             </select></td>
-                                                        <td> 
-                                                            <input type="date" class="form-control bg-white" name="date" >
-                                                        </td>
-                                                    </tr> 
-                                                     <input type="submit" value="submit" class="btnn" >
-                                               </form>
-                                            </tbody>
-                            </table>
-                        </div>
+                    </form>
                 </div>
             </div>
-            <!-- /profile Widget -->   
-            <div class="col-sm-12 bg-white">
-                <div class="tab-content bg-white">           
-                     
-            <!-- /profile Widget -->     
-                    <div id="pat_appointments" class="tab-pane fade show active">
-                        <div class="card card-table mb-0 bg-white">
-                            <div class="card-body bg-white">
-                                <div class="table-responsive bg-white">
-                                    <table class="table table-center mb-0 bg-white">
-                                     
-                                        <thead class="bg-white">
-                                            <tr> 
-                                                <th>Account</th>
-                                                <th>Receiver</th>
-                                                <th>Project</th>
-                                                <th>Type</th>                                              
-                                                <th>Amount</th>
-                                                <th>Date</th>
-                                                <th></th>
+        </div>
+    </div>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <a href="{% url 'project:addproject' %}" > <button type="submit" class="btn btn-primary mr-2" style="float:right;"> New</button><a>
+          <h4 class="card-title">transaction list</h4>
+          <div class="row">
+            <div class="col-12">
+              <div class="table-responsive">
+                <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                    <div class="row">
+                 
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
+                                        <thead style="background-color: #2b2155; color:#fff;">
+                                            <tr role="row">
+                                                <th style="width:200px;">Account</th>
+                                                <th style="width:200px;">project</th>
+                                                <th style="width:200px;">type</th>
+                                                <th style="width:200px;">made_by</th>
+                                                <th style="width:200px;">amount</th>
+                                                <th style="width:200px;">date</th>
+                                                <th style="width:200px;">Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            
-                                            {% for transaction in transactions %}
-                                            <tr>
-                                                <td> <a href="">{{transaction.account}} </a></td>
-                                                <td> {{transaction.receiver}} </a></td>
-                                                <td> <span class="badge badge-pill bg-info-light">{{transaction.project}} </span></td>
-                                                <td> <span class="badge badge-pill bg-info-light">{{transaction.get_type_display}}</span> </td>
-                                                <td><span class="badge badge-pill bg-info-light">{{transaction.amount}} DZD</span></td>
-                                                <td><span class="d-block text-info">{{transaction.date}}</span></td>
-                                                <td class="text-right">
-                                                    <div class="table-action">
-                                                        <a href="" class="btn btn-sm bg-success-light">
-                                                            Edit
-                                                        </a>
-                                                        
-                                                    </div>
+                                        <tbody> 
+                                        {% for transaction in transactions %}
+                                        <tr role="row" class="odd">
+                                                <td > <span class="badge badge-pill badge-light"> <a href="{% url 'cashflow:accounttdetail' transaction.account.pk %}" style="text-decoration : none; color:black;" > {{transaction.account}} </a></span></td>
+                                                {% if transaction.project %}
+                                                   <td> <a href="#" style=" text-decoration:none; color:black;"><span class=" badge badge-pill badge-light">  {{transaction.project}}</span> </a></td>
+                                                {% else %}
+                                                    <td><span class="badge badge-pill badge-light"> </span>  </td>      
+                                                {% endif %}
+                                                {% if transaction.get_tr_type_display %}
+                                                    <td> {{transaction.get_tr_type_display}} </td>      
+                                                {% else %}
+                                                    <td> {{transaction.other}} </td>      
+                                                {% endif %}
+                                                <td> {{transaction.made_by}}</td>
+                                                <td><span  class="badge badge-pill badge-info"> {{transaction.amount}} DZD</span> </td>
+                                                <td> <span  class="d-block text-info">{{transaction.date}}</span></td>
+                                                <td>
+                                                <a href="#">
+                                                <button class="btn btn-outline-primary">view</button></a>
+                                                <a href="#">
+                                                <button class="btn btn-outline-primary">edit</button></a>
+                                                <a href="#">
+                                                    <button class="btn btn-outline-primary">delete</button></a>
                                                 </td>
-                                            </div>
-                                        </td>
+                                            </tr>    
                                         {% endfor %}
-                                            </tr>
                                         </tbody>
-                                       
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- /Appointment Tab -->
-                
-                    
-                        
-                    
-                </div>	
-                <br>		
-            </div>
-            </div>
-         		
-    </div>
-    <br>
+                                       
+                                    </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+
+    <!-- main-panel ends -->
 </div>
-<!-- /Page Wrapper -->
+</div>
 {% endblock content %}

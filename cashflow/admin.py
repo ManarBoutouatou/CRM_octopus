@@ -4,7 +4,7 @@ from cashflow.models import  Account
 
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = [ 'acc_type']
+    list_display = [ 'name','acc_type', ]
 
 
 admin.site.register(Account, AccountAdmin) 

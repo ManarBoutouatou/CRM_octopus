@@ -35,11 +35,11 @@
                     <form action="" method="GET">
                     <div class="d-md-flex justify-content-between align-items-center">
                             <tr class="row">    
-                                <input class="form-control mr-sm-2 bg-white" type="search" placeholder="Search" aria-label="Search" name="owner">
+                                <input class="form-control mr-sm-2 bg-white" type="search" placeholder="Search" aria-label="Search" name="name">
                                 <td> </td>  
                                 <td > <input type="date" class="form-control bg-white" name="created" > </td> 
                                 <td >
-                                    <select class="form-control select bg-white" name="type" >
+                                    <select class="form-control select bg-white" name="acc_type" >
                                         <option value="">select account type</option>
                                         <option value="IN">IN</option>
                                         <option value="OU">OUt</option>	
@@ -72,16 +72,16 @@
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <div class="d-flex flex-row">
-                                                            <h6 class="badge badge-pill badge-dark"> {{account.get_type_display}}</h6>
-                                                            <div class="ml-3">{{account.owner}} {{account.project_name}} {{account.company}} 
-                                                                {% for project in account.projects.all %} 
-                                                                <h6>{{project.name}}</h6>
-                                                                <p class="text-muted">{{project.company}}</p>
-                                                                {% endfor %}
+                                                            <h6 class="badge badge-pill badge-dark"> {{account.get_acc_type_display}}</h6>
+                                                            <div class="ml-3">
+                                                                <a href="{% url 'cashflow:accounttdetail' account.pk %}" style="text-decoration : none; color:black;" > 
+                                                                <h3>{{account.name}}</h3>  </a>
+                                                                <p class="text-muted"></p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                          
                                             </div>
                                         {% endfor %}
                                     </div>

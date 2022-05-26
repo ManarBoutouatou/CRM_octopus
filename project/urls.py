@@ -1,6 +1,6 @@
 from django.urls import path 
    
-from project.views import ProjectListView, AddProjectView, ProjectUpdateView, ProjectDetailView,ProjectDeleteView, CashflowListView, AddTransactionView
+from project.views import ProjectListView, AddProjectView, ProjectUpdateView, ProjectDetailView,ProjectDeleteView, AddTransactionView
 from django.contrib.auth.decorators import login_required, permission_required
 app_name= 'project'
 
@@ -12,7 +12,6 @@ urlpatterns = [
    path('editproject/<int:pk>/', login_required(ProjectUpdateView.as_view()), name="editproject"),
    path('projectdetail/<int:pk>/', login_required(ProjectDetailView.as_view()), name="projectdetail"),
    path('projectdelete/<int:pk>/', login_required(ProjectDeleteView.as_view()), name="projectdelete"),
-   path('cashflowlist', login_required(CashflowListView.as_view()), name='cashflowlist'),
 
    path('addtransaction', login_required(AddTransactionView.as_view()), name="addtransaction"),
   

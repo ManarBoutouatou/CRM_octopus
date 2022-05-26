@@ -76,8 +76,7 @@
                                     <span class="badge badge-pill badge-light">{{project.name}} </span></a></td>
                                   <td class="d-block text-danger">{{project.deadline}}</td>
                                   <td>{{project.get_project_type_display}}</td>
-                                  <td> 
-                                    <span class="badge badge-pill {{project.get_status_class}}"> {{project.get_status_display}}</span>
+                                  <td> <span class="badge badge-pill {{project.get_status_class}}"> {{project.get_status_display}}</span></td>
                               </tr>    
                           {% endfor %}
                           </tbody>
