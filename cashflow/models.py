@@ -12,7 +12,7 @@ ACCOUNT_TYPE= (
 ) 
 class Account (models.Model): 
     # owner        = models.ManyToManyField(Project, related_name="project_name" )
-    name                    = models.CharField(max_length=254)
+    name     = models.CharField(max_length=250)
     # campany     = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="accounts") 
     acc_type     = models.CharField(choices=ACCOUNT_TYPE, max_length=2, null=True)
     actif       = models.BooleanField()

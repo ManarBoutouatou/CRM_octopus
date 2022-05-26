@@ -22,7 +22,7 @@ CONTRACT_TYPE_CHOICES = (
 )
 
 STATUS_TYPE_CHOICES= (
-    ('CO', 'Confirm'),
+    ('CF', 'Confirm'),
     ('CP', 'Completed'),
     ('PE', 'Pending'),
     ('CA', 'Cancelled'),
@@ -77,7 +77,17 @@ class Project (models.Model):
     updated     = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.name
-  
+    @property
+    def get_status_class(self):
+        if self.status == "CF":
+            return "badge-info"
+        elif self.status == "CP":
+            return "badge-warning"
+        elif self.status == "PE":
+            return "badge-secondary"
+        else:
+            return "badge-danger"
+    
 
 class Transaction(models.Model): 
     # receiver     = models.ForeignKey(Account, blank=True, null=True, on_delete=models.CASCADE, related_name="receiver")
