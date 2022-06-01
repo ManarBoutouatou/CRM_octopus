@@ -21,6 +21,8 @@ from cashflow.models import  Account
 from project.models import Project, Transaction
 from .filters import Accountfilter, Transactionfilter
 from .forms import AddAccountForm
+from django.db.models import Sum
+
 # Create your views here.
 
 #cashflow
@@ -60,6 +62,7 @@ class AddAccountView(CreateView):
         return context
    
 ##### 
+
 class CashflowListView(ListView): 
     template_name= "cashflow_list.html"
     model = Transaction 
@@ -70,6 +73,8 @@ class CashflowListView(ListView):
         context["transactions"] = filters.qs
         context["transactions_count"] =Transaction.objects.all().count()
         context["total"] =Transaction.payments.get_total()
+        
+        context["total_dettes"] = Project.objects.all().aggregate(Sum('get_project_dettes'))
         context["total_payment"] =Transaction.payments.get_total_payment()
         context["total_charges"] =Transaction.payments.get_total_charges()
         context["total_creance"] =Transaction.payments.get_total_creance()

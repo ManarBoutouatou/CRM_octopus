@@ -37,7 +37,7 @@
                                                                                                                     <span class="float-right badge badge-pill badge-warning">{{project.get_status_display}}</span>
                                                                                                             {% endif %}
                                                                                               
-                  <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> cost </span><span class="float-right badge badge-pill badge-info">  {{project.cost}} </span> </p>
+                  {% comment %} <p class="clearfix"> <span class="float-left" style="font-weight: bold;"> cost </span><span class="float-right badge badge-pill badge-info">  {{project.cost}} </span> </p> {% endcomment %}
                 </div>                                                       
               </div>
             </div>
@@ -66,8 +66,76 @@
                    
                     </div>
                   </div>
+                </div> <br>
+                <div class="row">
+                  
+                  <div class="col-md-3 grid-margin" style="margin-left: 250px;">
+                      <div class="card">
+                          <div class="card-body">
+                              <h4 class="card-title mb-0">Cost</h4>
+                              <div class="d-flex justify-content-between align-items-center">
+                                  <div class="d-inline-block pt-3">
+                                      <div class="d-md-flex">
+                                          <h4 class="mb-0">{{project.cost}} DZD</h4>
+                                          
+                                      </div>
+                                  </div>
+                              
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                      <div class="col-md-3 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-0">Debt</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-inline-block pt-3">
+                                        <div class="d-md-flex">
+                                            <h4 class="mb-0">{{project.get_project_dettes}} DZD</h4>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                          </div>
+                      </div>
                 </div>
-             
+                  <div class="profile-feed">
+                <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title"> Transactions </h4>
+                      <p class="card-description">
+                       
+                      </p>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead style="background-color: #2b2155; color:#fff;">
+                            <tr>
+                              <th>Made by</th>
+                              <th>Amount</th>
+                              <th>Date </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for transaction in project_transactions %}
+                           <tr>
+                               <td> <a href="#" style=" text-decoration:none; color:black;"><span  class=" badge badge-pill badge-light">{{transaction.made_by}} </span></a></td>
+                               <td><span class="fe text-black"> {{transaction.amount}} DZD</span></td>
+                               <td><span class="fe text-info">{{transaction.created}}</span></td>
+                           </tr>
+                            {% endfor %} 
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                
+                </div>
+
+               
+              </div>
             </div>
           </div> 
           

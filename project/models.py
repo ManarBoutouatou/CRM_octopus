@@ -103,7 +103,9 @@ class Project (models.Model):
         reste = self.cost - transactions['amount__sum']
         print('amount all trans', reste)
         return int(reste)
-
+    
+   
+  
 
         # return Project.objects.all().aggregate(Sum('cost'))
 
@@ -127,15 +129,15 @@ class Transaction(models.Model):
         return f"{self.project} - {self.tr_type}"
 
 
-class Task(models.Model):
-    project     = models.ForeignKey(Project,on_delete=models.CASCADE, related_name="tasks") 
-    manager     = models.ForeignKey(user,on_delete=models.SET_NULL, related_name="supervised_tasks", blank=True, null =True) 
-    status      = models.CharField(choices=STATUS_TYPE_CHOICES, max_length=2, blank=True, null=True)
-    description = tinymce_models.HTMLField( blank=True, null=True)
+# class Task(models.Model):
+#     project     = models.ForeignKey(Project,on_delete=models.CASCADE, related_name="tasks") 
+#     manager     = models.ForeignKey(user,on_delete=models.SET_NULL, related_name="supervised_tasks", blank=True, null =True) 
+#     status      = models.CharField(choices=STATUS_TYPE_CHOICES, max_length=2, blank=True, null=True)
+#     description = tinymce_models.HTMLField( blank=True, null=True)
 
-    responsible = models.ForeignKey(user,on_delete=models.SET_NULL, related_name="attributed_tasks", blank=True, null =True) 
-    actif       = models.BooleanField()
-    created     = models.DateTimeField(auto_now_add=True)
-    updated     = models.DateTimeField(auto_now=True)
-    deadline    = models.DateField(blank=True, null=True) 
-    started_date= models.DateField(blank=True, null=True) 
+#     responsible = models.ForeignKey(user,on_delete=models.SET_NULL, related_name="attributed_tasks", blank=True, null =True) 
+#     actif       = models.BooleanField()
+#     created     = models.DateTimeField(auto_now_add=True)
+#     updated     = models.DateTimeField(auto_now=True)
+#     deadline    = models.DateField(blank=True, null=True) 
+#     started_date= models.DateField(blank=True, null=True) 

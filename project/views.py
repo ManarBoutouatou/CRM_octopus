@@ -55,6 +55,8 @@ class ProjectDetailView(RedirectPermissionRequiredMixin,DetailView):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         project = self.get_object()
         project.get_project_dettes()
+        project_id = self.get_object().id
+        context["project_transactions"] = Transaction.objects.filter(project=project_id)
         filters=ProjectFilter(self.request.GET, queryset=Project.objects.all())
         context["projects"] = filters.qs
         return context
